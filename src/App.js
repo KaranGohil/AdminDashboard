@@ -4,12 +4,34 @@ import { FiSettings } from "react-icons/fi";
 // Tooltip allows us to hover over a component
 // A content (i.e Settings) will be displayed over the component
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+// This will work because of using index.jsx in component folder
+import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
+import {
+  ECommerce,
+  Orders,
+  Calendar,
+  Employees,
+  Stacked,
+  Pyramid,
+  Customers,
+  Kanban,
+  Line,
+  Area,
+  Bar,
+  Pie,
+  Financial,
+  ColorPicker,
+  ColorMapping,
+  Editor,
+} from "./pages";
 import "./App.css";
+import { useStateContext } from "./contexts/ContextProvider";
 
 // tailwindcss: flex (box) position relative and set dark background color
 // zIndex:1000 will make sure that this component is always in front
 const App = () => {
-  const activeMenu = true;
+  const { activeMenu } = useStateContext();
+
   return (
     <div>
       {/* BrowserRouter is a parent component where the children component will be render (Ask Amaan)*/}
@@ -28,43 +50,46 @@ const App = () => {
           </div>
           {activeMenu ? (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-              Sidebar
+              <Sidebar />
             </div>
           ) : (
-            <div className="w-0 dark:bg-secondary-dark-bg">Sidebar w-0</div>
+            <div className="w-0 dark:bg-secondary-dark-bg">
+              <Sidebar />
+            </div>
           )}
+          {/* This div is the center space where pages will load */}
           <div
             className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
               activeMenu ? "md:ml-72" : "flex-2"
             }`}
           >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full">
-              Navbar
+              <Navbar />
             </div>
           </div>
           <div>
             <Routes>
               {/* Dashboard */}
-              <Route path="/" element="ECommerce" />
-              <Route path="/ecommerce" element="ECommerce" />
+              <Route path="/" element={<ECommerce />} />
+              <Route path="/ecommerce" element={<ECommerce />} />
               {/* Pages */}
-              <Route path="/orders" element="Orders" />
-              <Route path="/Employees" element="Employees" />
-              <Route path="/Customers" element="Customers" />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/Employees" element={<Employees />} />
+              <Route path="/Customers" element={<Customers />} />
               {/* Apps */}
-              <Route path="/kanban" element="Kanban" />
-              <Route path="/editor" element="Editor" />
-              <Route path="/calender" element="Calender" />
-              <Route path="/color-picker" element="ColorPicker" />
+              <Route path="/kanban" element={<Kanban />} />
+              <Route path="/editor" element={<Editor />} />
+              <Route path="/calender" element={<Calendar />} />
+              <Route path="/color-picker" element={<ColorPicker />} />
               {/* Charts */}
-              <Route path="/line" element="Line" />
-              <Route path="/area" element="Area" />
-              <Route path="/bar" element="Bar" />
-              <Route path="/pie" element="Pie" />
-              <Route path="/financial" element="Financial" />
-              <Route path="/color-mapping" element="ColorMapping" />
-              <Route path="/pyramid" element="Pyramid" />
-              <Route path="/stacked" element="Stacked" />
+              <Route path="/line" element={<Line />} />
+              <Route path="/area" element={<Area />} />
+              <Route path="/bar" element={<Bar />} />
+              <Route path="/pie" element={<Pie />} />
+              <Route path="/financial" element={<Financial />} />
+              <Route path="/color-mapping" element={<ColorMapping />} />
+              <Route path="/pyramid" element={<Pyramid />} />
+              <Route path="/stacked" element={<Stacked />} />
             </Routes>
           </div>
         </div>

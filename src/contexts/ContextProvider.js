@@ -17,9 +17,26 @@ const initialState = {
 // This needs to be wrapped around index.js
 export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
+  const [isClicked, setIsClicked] = useState(initialState);
+  const [screenSize, setScreenSize] = useState(undefined);
+
+  const handleClick = (clicked) => {
+    //initialState is an object. Therefore, we need to write like this.
+    setIsClicked({ ...initialState, [clicked]: true });
+  };
 
   return (
-    <StateContext.Provider value={{ activeMenu, setActiveMenu }}>
+    <StateContext.Provider
+      value={{
+        activeMenu,
+        setActiveMenu,
+        isClicked,
+        setIsClicked,
+        handleClick,
+        screenSize,
+        setScreenSize,
+      }}
+    >
       {children}
     </StateContext.Provider>
   );
